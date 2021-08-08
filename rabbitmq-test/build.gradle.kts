@@ -74,18 +74,6 @@ jooq {
     }
 }
 
-//buildscript {
-//    repositories {
-//        mavenLocal()
-//        mavenCentral()
-//    }
-//
-//    dependencies {
-//        classpath("org.jooq:jooq-codegen:3.15.1")
-//        classpath("org.postgresql:postgresql:42.2.23.jre7")
-//    }
-//}
-
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -96,46 +84,3 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-
-//// todo create task for liquibase
-//abstract class RunJooqCodeGenerationTask : DefaultTask() {
-//    @get:Input
-//    abstract val host: Property<String>
-//    @get:Input
-//    abstract val port: Property<Int>
-//    @get:Input
-//    abstract val db: Property<String>
-//    @get:Input
-//    abstract val username: Property<String>
-//    @get:Input
-//    abstract val password: Property<String>
-//
-//    @TaskAction
-//    fun generate() {
-//        org.jooq.codegen.GenerationTool.generate(org.jooq.meta.jaxb.Configuration()
-//            .withJdbc(org.jooq.meta.jaxb.Jdbc()
-//                .withDriver("org.postgresql.Driver")
-//                .withUrl("jdbc:postgresql://${host.get()}:${port.get()}/${db.get()}")
-//                .withUser(username.get())
-//                .withPassword(password.get()))
-//            .withGenerator(org.jooq.meta.jaxb.Generator()
-//                .withDatabase(org.jooq.meta.jaxb.Database()
-//                    .withName("org.jooq.meta.postgres.PostgresDatabase")
-//                    .withInputSchema("public"))
-//                .withGenerate(org.jooq.meta.jaxb.Generate()
-//                    .withPojos(true)
-//                    .withDaos(true))
-//                .withTarget(org.jooq.meta.jaxb.Target()
-//                    .withPackageName("com.vladislavbakshanskij.rabbitmqtest.jooq")
-//                    .withDirectory("src/main/kotlin"))))
-//    }
-//}
-//
-//tasks.register<RunJooqCodeGenerationTask>("jooqGenerate") {
-//    host.set("localhost")
-//    port.set(5432)
-//    db.set("postgres")
-//    username.set("postgres")
-//    password.set("pass")
-//}
