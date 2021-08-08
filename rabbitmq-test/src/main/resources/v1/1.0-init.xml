@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="v1/1.0-init.xml" author="vlad.bakshanskij@gmail.com">
+        <createTable tableName="author">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="author_id_pk" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="dateBoth" type="timestamptz" defaultValue="now()" />
+        </createTable>
+        <createTable tableName="book">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="book_id_pk" />
+            </column>
+            <column name="title" type="varchar(40)">
+                <constraints nullable="false" />
+            </column>
+            <column name="author_id" type="uuid"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book" baseColumnNames="author_id" constraintName="author_id_fk"
+                                 referencedTableName="author" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

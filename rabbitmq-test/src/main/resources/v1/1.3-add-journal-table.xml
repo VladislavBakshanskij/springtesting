@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="v1/1.3-add-journal-table.xml" author="vlad.bakshanskij@gmail.com">
+        <createTable tableName="journal">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="journal_id_pk" />
+            </column>
+            <column name="action" type="varchar(30)" />
+            <column name="tableName" type="varchar(30)" />
+            <column name="objectState" type="jsonb"/>
+        </createTable>
+
+        <addNotNullConstraint tableName="journal" columnName="action" />
+        <addNotNullConstraint tableName="journal" columnName="tableName" />
+        <addNotNullConstraint tableName="journal" columnName="objectState" />
+    </changeSet>
+</databaseChangeLog>
